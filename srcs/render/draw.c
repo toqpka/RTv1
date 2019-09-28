@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 18:38:13 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 01:24:14 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/28 06:30:32 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void		choose_scene(t_sdl **sdl)
 		scene1(sdl);
 	else if ((*sdl)->scene_num == SCENE2_IMG)
 		scene2(sdl);
+	else if ((*sdl)->scene_num == SCENE3_IMG)
+		scene3(sdl);
 	else
 		ft_print_error_exit(&ft_putendl, "Error not_scene");
 	return ;
@@ -26,7 +28,7 @@ void		choose_scene(t_sdl **sdl)
 void		sdl_render(t_sdl *sdl)
 {
 	choose_scene(&sdl);
-	SDL_BlitSurface( sdl->image, NULL, sdl->screen, NULL );
+	//SDL_BlitSurface( sdl->image, NULL, sdl->screen, NULL );
 	SDL_UpdateWindowSurface(sdl->win);
 	return ;
 }

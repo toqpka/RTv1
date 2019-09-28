@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/09/28 04:11:16 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/09/28 06:31:37 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,16 @@ NAME := RTv1
 
 # SRCS files
 SRCS_PATH := ./srcs
-SRCS_FILES := main.c init_func.c color_pixel.c framebuffer.c framebuf_color.c\
+SRCS_FILES := main.c init_func.c color_pixel.c framebuffer.c framebuf_color.c framebuf_color_vec.c\
 							render/draw.c\
 							render/sdl_loop.c\
 							scene/scene1.c\
-							scene/scene2.c
+							scene/scene2.c\
+							scene/scene3.c\
+							vectors/rotate_vec.c\
+							vectors/op_vec.c\
+							vectors/new_vec.c\
+							vectors/normal_vec.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
 # OBJ files
@@ -55,7 +60,8 @@ LIB_LNK := -L $(LIB_PATH) -l ft
 
 # include lib and minilibX
 INCLUDES := $(LIB_INC) $(SDL_INC) $(SDL_IMAGE_INC) $(SDL_TTF_INC) $(SDL_MIXER_INC) -I ./includes
-HEADER := ./includes/rtv1.h ./includes/rtv1_prototypes.h ./includes/rtv1_structs.h
+HEADER := ./includes/rtv1.h ./includes/rtv1_prototypes.h\
+					./includes/rtv1_structs.h ./includes/rtv1_vec3.h
 
 # console colors
 RESET := \033[0m

@@ -6,12 +6,20 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:54 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 01:40:13 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/28 06:47:15 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_STRUCTS_H
 # define RTV1_STRUCTS_H
+
+# include "rtv1_vec3.h"
+
+typedef struct		s_ray
+{
+  t_vec3      start;
+  t_vec3      direct;
+}                 t_ray;
 
 typedef struct		s_framebuff
 {

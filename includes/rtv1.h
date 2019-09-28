@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 16:30:29 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 01:39:13 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/28 04:50:40 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include <SDL_image.h>
 # include <SDL_mixer.h>
 # include <SDL_ttf.h>
+# include <math.h>
 # include "libft.h"
 # include "rtv1_structs.h"
 # include "rtv1_prototypes.h"
+# include "rtv1_vec3.h"
 
 # define WIN_TITLE "RTv1 - SDL"
 

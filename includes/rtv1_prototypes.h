@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:57 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 04:14:01 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/28 06:30:56 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void          set_pixel(SDL_Surface *surface, int x, int y, uint32_t *pixel);
 */
 void        scene1(t_sdl **sdl);
 void        scene2(t_sdl **sdl);
+void        scene3(t_sdl **sdl);
 
 /*
 ** Useless can be change
@@ -53,4 +54,5 @@ void        scene2(t_sdl **sdl);
 t_framebuff   *ft_framebuff_init(size_t w, size_t h, uint32_t color);
 void          img_to_screen(SDL_Surface *scr, t_framebuff *frbuf);
 void          color_frame_flame(t_framebuff *frbuf);
+void          color_frame_vec(t_framebuff *frbuf);
 #endif
