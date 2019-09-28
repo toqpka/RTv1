@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   scene1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 18:32:56 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 01:07:44 by gwaymar-         ###   ########.fr       */
+/*   Created: 2019/09/28 00:05:03 by gwaymar-          #+#    #+#             */
+/*   Updated: 2019/09/28 04:13:58 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void			how_to_use(void)
+void    scene1(t_sdl **sdl)
 {
-	ft_print_error_exit(&ft_putendl, "Usage: ./RTv1 scene1");
-}
+  t_framebuff		*frbuf;
 
-int				main(int argc, char **argv)
-{
-	t_sdl		*sdl;
-
-	if (argc != 2)
-		how_to_use();
-	read_init(&sdl, argv[1]);
-	sdl_render(sdl);
-	sdl_loop(sdl);
-	ft_close(&sdl);
-	return (0);
+  frbuf = ft_framebuff_init(800, 512, pack_color(255, 255, 255));
+  color_frame_flame(frbuf);
+  img_to_screen((*sdl)->screen , frbuf);
+  ft_putstr("Loading: scene1\n");
+  return;
 }

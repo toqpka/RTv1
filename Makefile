@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/09/25 17:03:12 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/09/28 04:11:16 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME := RTv1
 
 # SRCS files
 SRCS_PATH := ./srcs
-SRCS_FILES := main.c init_func.c
+SRCS_FILES := main.c init_func.c color_pixel.c framebuffer.c framebuf_color.c\
+							render/draw.c\
+							render/sdl_loop.c\
+							scene/scene1.c\
+							scene/scene2.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
 # OBJ files
@@ -75,7 +79,7 @@ $(OBJECTS): $(OBJECTS_PATH)/%.o: $(SRCS_PATH)/%.c $(HEADER) | $(SUB_DIR_OBJ) $(O
 
 $(OBJECTS_PATH):
 	@mkdir -p $(OBJECTS_PATH) > /dev/null
-	
+
 $(SUB_DIR_OBJ):
 	@mkdir -p $(OBJECTS_PATH) $(SUB_DIR_OBJ) > /dev/null
 

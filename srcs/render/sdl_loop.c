@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sdl_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 18:32:56 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 01:07:44 by gwaymar-         ###   ########.fr       */
+/*   Created: 2019/09/28 00:30:14 by gwaymar-          #+#    #+#             */
+/*   Updated: 2019/09/28 00:30:33 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void			how_to_use(void)
+void		sdl_loop(t_sdl *sdl)
 {
-	ft_print_error_exit(&ft_putendl, "Usage: ./RTv1 scene1");
-}
-
-int				main(int argc, char **argv)
-{
-	t_sdl		*sdl;
-
-	if (argc != 2)
-		how_to_use();
-	read_init(&sdl, argv[1]);
-	sdl_render(sdl);
-	sdl_loop(sdl);
-	ft_close(&sdl);
-	return (0);
+	while (sdl->run_main)
+	{
+		while ( SDL_PollEvent( &(sdl->event) ) != 0 )
+			if ((SDL_QUIT == sdl->event.type) ||
+					(SDL_KEYDOWN == sdl->event.type &&
+						 SDL_SCANCODE_ESCAPE == sdl->event.key.keysym.scancode))
+				sdl->run_main = 0;
+	}
+	return ;
 }

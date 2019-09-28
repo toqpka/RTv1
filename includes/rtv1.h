@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 16:30:29 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/25 16:28:45 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/28 01:39:13 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,21 @@
 
 # define WIN_TITLE "RTv1 - SDL"
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 800
+
+
+# define SCENE1 "scene1"
+# define SCENE2 "scene2"
+# define SCENE3 "scene3"
+# define SCENE4 "scene4"
+# define SCENE5 "scene5"
+
+# define SCENE1_IMG 1
+# define SCENE2_IMG 2
+# define SCENE3_IMG 3
+# define SCENE4_IMG 4
+# define SCENE5_IMG 5
 
 # define PI 3.14159265359
 #endif

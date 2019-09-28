@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 18:32:56 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 01:07:44 by gwaymar-         ###   ########.fr       */
+/*   Created: 2019/09/27 18:38:13 by gwaymar-          #+#    #+#             */
+/*   Updated: 2019/09/28 01:24:14 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void			how_to_use(void)
+void		choose_scene(t_sdl **sdl)
 {
-	ft_print_error_exit(&ft_putendl, "Usage: ./RTv1 scene1");
+	if ((*sdl)->scene_num == SCENE1_IMG)
+		scene1(sdl);
+	else if ((*sdl)->scene_num == SCENE2_IMG)
+		scene2(sdl);
+	else
+		ft_print_error_exit(&ft_putendl, "Error not_scene");
+	return ;
 }
 
-int				main(int argc, char **argv)
+void		sdl_render(t_sdl *sdl)
 {
-	t_sdl		*sdl;
-
-	if (argc != 2)
-		how_to_use();
-	read_init(&sdl, argv[1]);
-	sdl_render(sdl);
-	sdl_loop(sdl);
-	ft_close(&sdl);
-	return (0);
+	choose_scene(&sdl);
+	SDL_BlitSurface( sdl->image, NULL, sdl->screen, NULL );
+	SDL_UpdateWindowSurface(sdl->win);
+	return ;
 }
