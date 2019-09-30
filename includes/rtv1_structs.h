@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:54 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 06:47:15 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/30 04:36:43 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,9 @@
 
 typedef struct		s_ray
 {
-  t_vec3      start;
+  t_vec3      origin;
   t_vec3      direct;
 }                 t_ray;
-
-typedef struct		s_framebuff
-{
-  size_t      w; // image dimensions
-  size_t      h;
-  uint32_t    *img; // storage container
-}                 t_framebuff;
 
 typedef struct		s_image
 {
@@ -57,4 +50,25 @@ typedef struct		s_ltexture
 
 }                 t_ltexture;
 
+typedef struct		s_hit_rec
+{
+  double    t;
+  t_vec3    p;
+  t_vec3    normal;
+}                 t_hit_rec;
+
+typedef struct		s_sphere
+{
+  double    radius;
+  t_vec3    center;
+}                 t_sphere;
+
+
+typedef struct		s_hitable
+{
+  void                *content;
+  size_t              content_size;
+  struct s_hitable    *next;
+  int                 list_size;
+}                 t_hitable;
 #endif

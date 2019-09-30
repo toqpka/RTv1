@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/09/28 06:31:37 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/09/30 04:31:59 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,21 @@ NAME := RTv1
 
 # SRCS files
 SRCS_PATH := ./srcs
-SRCS_FILES := main.c init_func.c color_pixel.c framebuffer.c framebuf_color.c framebuf_color_vec.c\
+SRCS_FILES := main.c init_func.c color_pixel.c color_sdl.c surface.c\
 							render/draw.c\
 							render/sdl_loop.c\
 							scene/scene1.c\
 							scene/scene2.c\
 							scene/scene3.c\
+							scene/scene4.c\
+							scene/scene5.c\
 							vectors/rotate_vec.c\
 							vectors/op_vec.c\
 							vectors/new_vec.c\
-							vectors/normal_vec.c
+							vectors/normal_vec.c\
+							drawer/background.c\
+							drawer/hit_sphere.c\
+							drawer/hit_list.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
 # OBJ files

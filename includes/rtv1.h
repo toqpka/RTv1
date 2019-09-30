@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 16:30:29 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 04:50:40 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/30 04:33:25 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@
 # define SCENE4_IMG 4
 # define SCENE5_IMG 5
 
+# define FALSE 0
+# define TRUE 1
 # define PI 3.14159265359
 #endif

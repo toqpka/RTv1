@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 04:45:04 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/28 05:37:26 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/28 08:05:02 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3      vec_cross(t_vec3 v1, t_vec3 v2);
 /*
 **	normal vec
 */
-t_vec3      vec_norm(t_vec3 v);
+t_vec3      unit_vector(t_vec3 v);
 
 /*
 **	length_vect
