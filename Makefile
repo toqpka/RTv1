@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/09/30 04:31:59 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/09/30 08:43:34 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRCS_FILES := main.c init_func.c color_pixel.c color_sdl.c surface.c\
 							vectors/normal_vec.c\
 							drawer/background.c\
 							drawer/hit_sphere.c\
-							drawer/hit_list.c
+							drawer/hit_list.c\
+							drawer/new_hit_rec.c\
+							objects/sphere.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
 # OBJ files
@@ -74,6 +76,11 @@ RED := \033[31m
 BLUE := \033[34m
 YELLOW := \033[33m
 GREEN := \033[32m
+BOLD := \033[1m
+MAGEN := \033[35m
+CUSTOM := \033[38;5;93m
+GRAY := \033[38;5;246m
+L_GRAY := \033[38;5;242m
 INVERT := \033[7m
 SUCCESS := [$(GREEN)✓$(RESET)]
 SUCCESS_OK := [$(GREEN)OK$(RESET)]
@@ -84,9 +91,8 @@ CLEAR_ROW := @echo "\033[1A\033[K\033[1A"
 all: $(NAME)
 
 $(OBJECTS): $(OBJECTS_PATH)/%.o: $(SRCS_PATH)/%.c $(HEADER) | $(SUB_DIR_OBJ) $(OBJECTS_PATH)
-	@echo -n ' $@: '
+	@echo "$(SUCCESS)  $@: "
 	@$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(SUCCESS)"
 
 $(OBJECTS_PATH):
 	@mkdir -p $(OBJECTS_PATH) > /dev/null
@@ -95,35 +101,34 @@ $(SUB_DIR_OBJ):
 	@mkdir -p $(OBJECTS_PATH) $(SUB_DIR_OBJ) > /dev/null
 
 $(LIB): | $(HEADER)
-	@echo "$(RED) > $(RESET)Compilation $(NAME)"
+	@echo "$(BOLD)$(RED) > $(CUSTOM)Compilation $(NAME)$(RESET)"
 
 $(NAME): $(LIB) $(OBJECTS) $(HEADER)
-	@echo "$(YELLOW) Creating OBJ .o $(RESET)$(SUCCESS_OK)"
-	@echo "$(YELLOW) $(LIB_NAME)           $(RESET)[$(YELLOW)Compiling...$(RESET)]"
+	@echo "$(GRAY) Creating OBJ .o   $(RESET)$(SUCCESS_OK)"
+	@echo "$(GRAY) $(LIB_NAME)             $(RESET)[$(YELLOW)Compiling...$(RESET)]"
 	@make -C $(LIB_PATH) > /dev/null
 	$(CLEAR_ROW)
-	@echo "$(YELLOW) $(LIB_NAME)           $(RESET)$(SUCCESS_OK)"
-	@echo "$(YELLOW) $(NAME)            $(RESET)[$(YELLOW)Compiling...$(RESET)]"
+	@echo "$(GRAY) $(LIB_NAME)             $(RESET)$(SUCCESS_OK)"
+	@echo "$(GRAY) Compiling... $(NAME)$(RESET)"
 	@$(CC) $(SDL2) $(CCFLAGS) $(OBJECTS) $(LIB_LNK) -o $(NAME)
 	$(CLEAR_ROW)
-	@echo "$(YELLOW) $(NAME)            $(RESET)$(SUCCESS_OK)"
-	@echo "$(RED) > $(BLUE)Compilation is ended$(RESET)"
+	@echo "$(GRAY) Compiling... $(BOLD)$(NAME)$(CUSTOM) > Successful ✓$(RESET)"
 
 #	Removing objects
 clean:
-	@echo "$(RED)removing  object files - ...$(RESET)"
+	@echo "$(L_GRAY)removing  object files - ...$(RESET)"
 	@make -C $(LIB_PATH) clean > /dev/null
 	@rm -rf $(OBJECTS_PATH) > /dev/null
 	$(CLEAR_ROW)
-	@echo "$(RED)removing  object files - done$(RESET)"
+	@echo "$(L_GRAY)removing  object files - done$(RESET)"
 
 #	Removing objects and project_launcher
 fclean: clean
-	@echo "$(RED)removing  $(NAME) - ...$(RESET)"
+	@echo "$(L_GRAY)removing  $(NAME) - ...$(RESET)"
 	@make -C $(LIB_PATH) fclean > /dev/null
 	@rm -rf $(NAME) > /dev/null
 	$(CLEAR_ROW)
-	@echo "$(RED)removing  $(NAME) - done$(RESET)"
+	@echo "$(L_GRAY)removing  $(NAME) - done$(RESET)"
 
 #	All removing then compiling
 re: fclean all
