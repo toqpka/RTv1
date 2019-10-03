@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 00:06:25 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/30 02:16:06 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/03 18:46:49 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void    scene2(t_sdl **sdl)
 {
-  // t_framebuff		*frbuf;
-  //
-  // frbuf = ft_framebuff_init(WIN_WIDTH, WIN_HEIGHT, pack_color(0, 0, 0));
-  // //frbuf = ft_framebuff_init(200, 100, pack_color(255, 255, 255));
-  // color_frame_vec(frbuf);
-  //img_to_screen((*sdl)->screen , frbuf);
+  SDL_Surface		*frame;
+
+  frame = create_surface(WIN_WIDTH,WIN_HEIGHT);
+  back_scene2(frame);
+
+  SDL_BlitSurface( frame, NULL, (*sdl)->screen, NULL );
   ft_putstr("Loading: scene2\n");
   return;
 }

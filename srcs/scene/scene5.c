@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 00:05:03 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/30 02:47:46 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/30 07:54:12 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void    scene5(t_sdl **sdl)
   //SDL_Surface *test = SDL_LoadBMP( "textures/Canada-Flag.bmp" );
   //SDL_BlitSurface( test, NULL, (*sdl)->screen, NULL );
   SDL_BlitSurface( frame, NULL, (*sdl)->screen, NULL );
-  SDL_UpdateWindowSurface( (*sdl)->win );
+  
   ft_putstr("Loading: scene5\n");
   return;
 }

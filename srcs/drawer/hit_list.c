@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 04:31:37 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/30 04:44:04 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/09/30 06:47:28 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // uint8_t   hitable_list(t_ray ray, double t_min, double t_max, t_hit_rec rec)
 // {
-//   t_hit_rec   temp_rec = new_hit_rec();
+//   t_hit_rec   temp_rec = new_hit_rec(0.0, vec_new(0.0,0.0,0.0),vec_new(0.0,0.0,0.0));
 //   uint8_t     hit_anything = FALSE;
 //   double      closest_so_far = t_max;
 //   int         i;

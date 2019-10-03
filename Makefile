@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/09/30 08:43:34 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/10/03 21:59:15 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ SRCS_FILES := main.c init_func.c color_pixel.c color_sdl.c surface.c\
 							drawer/hit_sphere.c\
 							drawer/hit_list.c\
 							drawer/new_hit_rec.c\
-							objects/sphere.c
+							objects/sphere.c\
+							objects/light.c\
+							material/material.c\
+							drawer/back_scene2.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
 # OBJ files
@@ -91,7 +94,7 @@ CLEAR_ROW := @echo "\033[1A\033[K\033[1A"
 all: $(NAME)
 
 $(OBJECTS): $(OBJECTS_PATH)/%.o: $(SRCS_PATH)/%.c $(HEADER) | $(SUB_DIR_OBJ) $(OBJECTS_PATH)
-	@echo "$(SUCCESS)  $@: "
+	@echo "$(SUCCESS)  $@ "
 	@$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJECTS_PATH):

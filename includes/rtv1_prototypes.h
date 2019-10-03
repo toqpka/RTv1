@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:57 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/30 04:02:11 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/03 23:02:57 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void		    sdl_render(t_sdl *sdl);
 SDL_Color     int_to_color(int color);
 int           color_to_int(SDL_Color color);
 void          clear_surface(SDL_Surface *surf, const SDL_Rect *rect, const int color, void *param);
-void			clear_surface(SDL_Surface *surf, const SDL_Rect *rect, const int color, void *param);
-void			draw_filled_square(SDL_Surface *surf, const SDL_Rect *rect, const int color, void *param);
+void		    	clear_surface(SDL_Surface *surf, const SDL_Rect *rect, const int color, void *param);
+void		    	draw_filled_square(SDL_Surface *surf, const SDL_Rect *rect, const int color, void *param);
 SDL_Surface		*create_surface(int width, int height);
 
 /*
@@ -48,7 +48,18 @@ void      backgr(SDL_Surface		*frame);
 t_vec3    ray_color(t_ray ray);
 t_ray     new_ray(t_vec3 orig, t_vec3 dir);
 double    hit_sphere(t_vec3 center, double radius, t_ray ray);
-uint8_t   hitable(t_ray ray, double t_min, double t_max, t_hit_rec rec);
+//uint8_t   hitable(t_ray ray, double t_min, double t_max, t_hit_rec rec);
+uint8_t   hitable(t_sphere sphere, t_ray ray, double t_min, double t_max, t_hit_rec rec);
+t_hit_rec   new_hit_rec(double t, t_vec3 p, t_vec3 normal);
+
+int ray_intersect(t_sphere sphere, t_ray ray, float *t0);
+t_vec3	cast_ray(t_ray ray, t_sphere *sphers, t_light *light , size_t	depth);
+
+/*
+** Object functions
+*/
+t_sphere    sphere_new(t_vec3 center, double radius, t_mater mater);
+
 
 /*
 ** Color pack functions
@@ -70,5 +81,17 @@ void        scene2(t_sdl **sdl);
 void        scene3(t_sdl **sdl);
 void        scene4(t_sdl **sdl);
 void        scene5(t_sdl **sdl);
+
+/*
+** testing func
+*/
+void        back_scene2(SDL_Surface		*frame);
+t_sphere    *create_null_list_spheres(int nbr);
+t_mater     mater_new(void);
+void        mater_fill(t_mater *mat, char *mat_type);
+int         scene_intersect(t_sphere *sphere, t_ray ray, t_vec3 *hit, t_vec3 *nbig, t_mater *material);
+t_light     *create_null_list_lights(int nbr);
+t_light     light_new(t_vec3 pos, double intens);
+t_vec3      reflect(t_vec3 a, t_vec3 b);
 
 #endif
