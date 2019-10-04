@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:54 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 23:42:54 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 04:44:52 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@ typedef struct		s_ltexture
 
 }                 t_ltexture;
 
-typedef struct		s_hit_rec
-{
-  double    t;
-  t_vec3    p;
-  t_vec3    normal;
-}                 t_hit_rec;
-
 typedef struct		s_hit
 {
   double          t;
@@ -79,6 +72,25 @@ typedef struct		s_mater
   double    spec_exp;
 }                 t_mater;
 
+typedef struct		s_hit_rec
+{
+  double    t;
+  t_vec3    p;
+  t_vec3    normal;
+  t_mater   *mat_ptr;
+}                 t_hit_rec;
+
+/*
+**	Camera
+*/
+typedef struct		s_cam
+{
+  t_vec3    lower_l;
+  t_vec3    horiz;
+  t_vec3    vert;
+  t_vec3    origin;
+}                 t_cam;
+
 /*
 **	Objects
 */
@@ -98,9 +110,5 @@ typedef struct		s_light
   double    intens;
   t_vec3    pos;
 }                 t_light;
-// typedef struct		s_hitable
-// {
-//   struct s_hitable    **list;
-//   int                 list_size;
-// }                 t_hitable;
+
 #endif

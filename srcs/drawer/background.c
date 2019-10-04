@@ -6,70 +6,118 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 02:53:17 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 21:11:32 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 06:13:45 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-// t_vec3 ray_color(t_ray ray)
-// {
-//   double t = hit_sphere(vec_new(0,0,-1),0.9,ray);
-//   if (t > 0.0)
-//   {
-//     t_vec3 point_at = vec_op_add(ray.origin,vec_scale(ray.direct,t));
-//     t_vec3 nbig = unit_vector(vec_op_sub(point_at,vec_new(0,0,-1)));
-//     return vec_scale(vec_op_add(nbig,vec_new(1,1,1)),0.5);
-//   }
-//   t_vec3 unit_direct = unit_vector(ray.direct);
-//   t = 0.7*(unit_direct.y + 1.0);
-//   t_vec3 a = vec_scale(vec_new(1.0, 1.0, 1.0), 1.0-t);
-//   t_vec3 b = vec_scale(vec_new(0.5, 0.7, 1.0), t);
-//   return (vec_op_add(a,b));
-// }
+t_vec3  random_in_unit_sphere()
+{
+  t_vec3  p = vec_new(1.0,1.0,1.0);
+  while (vec_squared_len(p) >= 1.0)
+  {
+    p = vec_op_sub(vec_scale(vec_new(drand48(),drand48(),drand48()),2.0), vec_new(1,1,1));
+  }
+  return (p);
+}
+
+int ft_scatter(t_mater *mater,t_ray ray, t_hit_rec *rec, t_vec3 *atten, t_ray *scatter)
+{
+  if (mater->type_mat == MAT_LAMBERT)
+  {
+    t_vec3 target = vec_op_add(vec_op_add((*rec).p, (*rec).normal),random_in_unit_sphere());
+    *scatter = new_ray((*rec).p, vec_op_sub(target,(*rec).p));
+    *atten = mater->albedo;
+    return (TRUE);
+  }
+  if (mater->type_mat == MAT_METAL)
+  {
+    t_vec3 reflected = reflect(unit_vector(ray.direct),(*rec).normal);
+    *scatter = new_ray((*rec).p, reflected);
+    *atten = mater->albedo;
+    return (vec_dot((*scatter).direct,(*rec).normal) > 0);
+  }
+  return (0);
+}
+
+t_vec3 ray_color(t_ray ray, t_sphere *world, int depth)
+{
+  double t;
+   //t= hit_sphere(vec_new(0,0,-1),0.9,ray);
+  t_hit_rec   rec;
+  if (hitable_list(ray, 0.001, MAXFLOAT, &rec, world))
+  {
+    t_vec3 target = vec_op_add(vec_op_add(rec.p,rec.normal),random_in_unit_sphere());
+    t_vec3  atten;
+    t_ray   scatter;
+    return (vec_scale(ray_color(new_ray(rec.p,vec_op_sub(target,rec.p)),world,1),0.5));
+
+    // if (depth < 50 || ft_scatter(rec.mat_ptr,ray,&rec,&atten,&scatter))
+    // {
+    //   return (vec_op_mult(atten, ray_color(scatter, world, depth+1)));
+    // }
+    // else
+    //   return (vec_new(0,0,0));
+  }
+  else
+  {
+    t_vec3 unit_direct = unit_vector(ray.direct);
+    t = 0.5*(unit_direct.y + 1.0);
+    t_vec3 a = vec_scale(vec_new(1.0, 1.0, 1.0), 1.0-t);
+    t_vec3 b = vec_scale(vec_new(0.5, 0.7, 1.0), t);
+    return (vec_op_add(a,b));
+  }
+}
 
 
 
 
 
-////////////// GOOD   fix  cast_ray  need array spheres   *spheres
-// void    backgr(SDL_Surface		*frame)
-// {
-//   int i,j;
-//   double down = frame->h/100.0;
-//   double left = frame->w/100.0;
-//   //printf("down=%lf   left=%lf\n",down,left);
-//   t_vec3 lower_l = vec_new(-left,-down,-1.0);
-//   t_vec3 horiz = vec_new(left*2.0, 0.0, 0.0);
-//   t_vec3 vert = vec_new(0.0, down*2.0, 0.0);
-//   t_vec3 origin = vec_new(0.0, 0.0, 0.0);
-//   //t_hitable *list[2];
-//   t_mater   ivory;
-//   t_mater   red_rubber;
-//
-//   mater_fill(&ivory, MAT_IVORY);
-//   mater_fill(&red_rubber, MAT_RED_RUBBER);
-//
-//
-//
-//   t_sphere sphere = sphere_new(vec_new(0,0,-1.0), 0.1, ivory);
-//   t_sphere sphere2 = sphere_new(vec_new(0,-100.5,-1.0), 100, red_rubber);
-//   i = -1;
-//   while (++i < frame->h)
-//   {
-//     j = -1;
-//     while (++j < frame->w)
-//     {
-//       double x =  (2*(j+0.5)/(double)frame->w - 1)*tan(FOV/2.0)*frame->w/(double)frame->h;
-//       double y = -(2*(i+0.5)/(double)frame->h - 1)*tan(FOV/2.0);
-//       t_vec3 dir = unit_vector(vec_new(x, y, -1));
-//       t_ray ray = new_ray(origin, dir);
-//       t_vec3 col = cast_ray(ray, sphere);
-//       int r = (int)(255.99*col.x);
-//       int g = (int)(255.99*col.y);
-//       int b = (int)(255.99*col.z);
-//       put_pixel(frame, j, i, pack_color(r,g,b));
-//     }
-//   }
-//   return ;
-// }
+void    backgr(SDL_Surface		*frame)
+{
+  int i,j;
+
+  t_cam cam;
+  cam = exec_cam(frame->w,frame->h);
+
+  // CREATING lights
+    t_light   *lights;
+    lights = exec_lights();
+    // CREATING Spheres
+    t_sphere  *spher;
+    spher = exec_sphers();
+
+t_sphere *world;
+world = spher;
+
+//smoothing  ok if 100  (slow load 30 sec)
+int   ns = 1;
+int   s;
+  i = -1;
+  while (++i < frame->h)
+  {
+    j = -1;
+    while (++j < frame->w)
+    {
+      t_vec3  col = vec_new(0,0,0);
+      s = -1;
+      while (++s < ns)
+      {
+        double hor = (double)(j + drand48())/(double)(frame->w); //u
+        double ver = (double)(i + drand48())/(double)(frame->h); //v
+        t_ray ray = get_ray(cam, hor, ver);
+        t_vec3  p = vec_op_add(ray.origin,vec_scale(ray.direct,2.0f));
+        col = vec_op_add(col,ray_color(ray, world, 0));
+      }
+
+      col = vec_scale(col,1.0f/ns);
+      col = vec_new(sqrt(col.x),sqrt(col.y),sqrt(col.z));
+      int r = (int)(255.99*col.x);
+      int g = (int)(255.99*col.y);
+      int b = (int)(255.99*col.z);
+      put_pixel(frame, j, i, pack_color(r,g,b));
+    }
+  }
+  return ;
+}

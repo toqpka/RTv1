@@ -6,21 +6,21 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 05:01:18 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 21:01:52 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 01:25:28 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-// t_hit_rec   new_hit_rec(double t, t_vec3 p, t_vec3 normal)
-// {
-//   t_hit_rec new;
-//
-//   new.t = t;
-//   new.p = p;
-//   new.normal = normal;
-//   return (new);
-// }
+t_hit_rec   new_hit_rec(double t, t_vec3 p, t_vec3 normal)
+{
+  t_hit_rec new;
+
+  new.t = t;
+  new.p = p;
+  new.normal = normal;
+  return (new);
+}
 
 int ray_intersect(t_sphere sphere, t_ray ray, float *t0)
 {
@@ -50,7 +50,7 @@ int   scene_intersect(t_sphere *sphere, t_ray ray, t_vec3 *hit, t_vec3 *nbig, t_
         {
             spheres_dist = dist_i;
             *hit = vec_op_add(ray.origin,vec_scale(ray.direct,dist_i));
-            *nbig = unit_vector((vec_op_sub(*hit,sphere[i].center)));            
+            *nbig = unit_vector((vec_op_sub(*hit,sphere[i].center)));
             *material = sphere[i].mater;
         }
     }

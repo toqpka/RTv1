@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normal_vec.c                                       :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/28 05:28:28 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 03:05:42 by gwaymar-         ###   ########.fr       */
+/*   Created: 2019/10/04 03:35:42 by gwaymar-          #+#    #+#             */
+/*   Updated: 2019/10/04 03:43:58 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double    vec_length(t_vec3 v)
+t_ray     new_ray(t_vec3 orig, t_vec3 dir)
 {
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+  t_ray n_ray;
+
+  n_ray.origin = orig;
+  n_ray.direct = dir;
+  return (n_ray);
 }
 
-double    vec_squared_len(t_vec3 v)
+t_ray     get_ray(t_cam cam, double u, double v)
 {
-	return (v.x * v.x + v.y * v.y + v.z * v.z);
-}
-
-t_vec3    unit_vector(t_vec3 v)
-{
-	if (vec_length(v))
-		return ( vec_scale(v, 1.0/ vec_length(v)) );
-	return (vec_new(0, 0, 0));
+  t_ray   new_r;
+  t_vec3  aa;
+  t_vec3  dir;
+  aa = vec_op_add(cam.lower_l,vec_scale(cam.horiz,u));
+  dir = vec_op_add(aa,vec_scale(cam.vert,v));
+  new_r = new_ray(cam.origin, dir);
+  return (new_r);
 }

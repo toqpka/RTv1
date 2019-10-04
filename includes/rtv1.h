@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 16:30:29 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 23:13:53 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 06:42:41 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define MAT_IVORY "ivory"
 # define MAT_RED_RUBBER "red_rubber"
 # define MAT_MIRROR "mirror"
+# define MAT_METAL "metal"
+# define MAT_LAMBERT "lambert"
 
 
 # define LIGHT_NMB 3

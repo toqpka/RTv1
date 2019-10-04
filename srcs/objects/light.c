@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 21:58:54 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 23:36:11 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 04:27:47 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_light    *create_null_list_lights(int nbr)
   return (n);
 }
 
-t_light    light_new(t_vec3 pos, double intens)
+t_light     light_new(t_vec3 pos, double intens)
 {
   t_light    new_light;
 
@@ -38,7 +38,21 @@ t_light    light_new(t_vec3 pos, double intens)
   return (new_light);
 }
 
-t_vec3    reflect(t_vec3 a, t_vec3 b)
+t_vec3      reflect(t_vec3 v, t_vec3 n)
 {
-  return (vec_op_sub(a,vec_scale(vec_scale(b,2.0f),vec_dot(a,b))));
+  return (vec_op_sub(v,vec_scale(n,2.0*vec_dot(v,n))));
+}
+
+t_light   *exec_lights(void)
+{
+  t_light   *lights;
+  int       nbrs_lghts = LIGHT_NMB;
+  lights = create_null_list_lights(nbrs_lghts);
+  if (!(lights))
+    ft_print_error_exit(&ft_putendl, "Error, no_lights");
+
+  lights[0] = light_new(vec_new(-20.0,  20.0,  20.0), 1.5);
+  lights[1] = light_new(vec_new( 30.0,  50.0, -25.0), 1.4);
+  lights[2] = light_new(vec_new( 30.0,  20.0,  30.0), 0.4);
+  return (lights);
 }

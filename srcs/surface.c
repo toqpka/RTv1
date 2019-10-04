@@ -6,20 +6,11 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 02:11:21 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/09/30 03:32:12 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 03:36:57 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-// RAY function
-t_ray new_ray(t_vec3 orig, t_vec3 dir)
-{
-  t_ray n_ray;
-
-  n_ray.origin = orig;
-  n_ray.direct = dir;
-  return (n_ray);
-}
 
 static void		mask_byteorder(Uint32 *rmask, Uint32 *gmask, Uint32 *bmask, Uint32 *amask)
 {

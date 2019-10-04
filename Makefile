@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/10/03 21:59:15 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/10/04 03:36:06 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ SRCS_PATH := ./srcs
 SRCS_FILES := main.c init_func.c color_pixel.c color_sdl.c surface.c\
 							render/draw.c\
 							render/sdl_loop.c\
+							render/cast_ray.c\
+							render/ray.c\
 							scene/scene1.c\
 							scene/scene2.c\
 							scene/scene3.c\
@@ -33,7 +35,8 @@ SRCS_FILES := main.c init_func.c color_pixel.c color_sdl.c surface.c\
 							objects/sphere.c\
 							objects/light.c\
 							material/material.c\
-							drawer/back_scene2.c
+							drawer/back_scene2.c\
+							camera/camera.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
 # OBJ files

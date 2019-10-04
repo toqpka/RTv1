@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 18:41:16 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 23:45:08 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 06:42:46 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void    back_scene2(SDL_Surface		*frame)
   spher[2] = sphere_new(vec_new( 1.5, -0.5, -18.0), 3, red_rubber);
   spher[3] = sphere_new(vec_new( 7.0,  5.0, -18.0), 4, ivory);
 
+  size_t	depth = 0;
+
   i = -1;
   while (++i < frame->h)
   {
@@ -63,7 +65,7 @@ void    back_scene2(SDL_Surface		*frame)
       double y = -(2*(i+0.5)/(double)frame->h - 1)*tan(FOV/2.);
       t_vec3 dir = unit_vector(vec_new(x, y, -1));
       t_ray ray = new_ray(origin, dir);
-      size_t	depth = 0;
+      depth = 0;
       t_vec3 col = cast_ray(ray, spher, lights, depth);
       int r = (int)(255.99*col.x);
       int g = (int)(255.99*col.y);

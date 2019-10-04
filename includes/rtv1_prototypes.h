@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:57 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/03 23:02:57 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/04 05:27:55 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ SDL_Surface		*create_surface(int width, int height);
 ** DRAWER few colors
 */
 void      backgr(SDL_Surface		*frame);
-t_vec3    ray_color(t_ray ray);
+t_vec3    ray_color(t_ray ray, t_sphere *world, int depth);
 t_ray     new_ray(t_vec3 orig, t_vec3 dir);
+t_ray     get_ray(t_cam cam, double u, double v);
 double    hit_sphere(t_vec3 center, double radius, t_ray ray);
 //uint8_t   hitable(t_ray ray, double t_min, double t_max, t_hit_rec rec);
-uint8_t   hitable(t_sphere sphere, t_ray ray, double t_min, double t_max, t_hit_rec rec);
+//uint8_t   hitable(t_sphere sphere, t_ray ray, double t_min, double t_max, t_hit_rec rec);
 t_hit_rec   new_hit_rec(double t, t_vec3 p, t_vec3 normal);
 
 int ray_intersect(t_sphere sphere, t_ray ray, float *t0);
@@ -61,6 +62,11 @@ t_vec3	cast_ray(t_ray ray, t_sphere *sphers, t_light *light , size_t	depth);
 t_sphere    sphere_new(t_vec3 center, double radius, t_mater mater);
 
 
+/*
+** Camera functions
+*/
+t_cam   cam_init(t_vec3 lower_l, t_vec3 horiz, t_vec3 vert, t_vec3 origin);
+t_cam   exec_cam(int wid, int height);
 /*
 ** Color pack functions
 */
@@ -93,5 +99,15 @@ int         scene_intersect(t_sphere *sphere, t_ray ray, t_vec3 *hit, t_vec3 *nb
 t_light     *create_null_list_lights(int nbr);
 t_light     light_new(t_vec3 pos, double intens);
 t_vec3      reflect(t_vec3 a, t_vec3 b);
+/*
+** testing func 2nd
+*/
+
+double    hit_sphere(t_vec3 center, double radius, t_ray ray);
+t_light   *exec_light(void);
+uint8_t   hitable_list(t_ray ray, double t_min, double t_max, t_hit_rec *rec, t_sphere *world);
+t_light   *exec_lights(void);
+t_sphere   *exec_sphers(void);
+uint8_t   hitable(t_sphere sphere, t_ray ray, double t_min, double t_max, t_hit_rec *rec);
 
 #endif
