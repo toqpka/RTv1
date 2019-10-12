@@ -6,13 +6,13 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 00:05:03 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 04:21:39 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/05 01:41:38 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static int ft_flip(SDL_Surface *surface)
+int ft_flip(SDL_Surface *surface)
 {
     Uint8 *t;
     register Uint8 *a, *b;
@@ -63,7 +63,7 @@ void    scene1(t_sdl **sdl)
   frame = create_surface(WIN_WIDTH,WIN_HEIGHT);
   backgr(frame);
 
-  ft_flip(frame); //  rotatte  verticaly  
+  ft_flip(frame); //  rotatte  verticaly
   SDL_BlitSurface( frame, NULL, (*sdl)->screen, NULL );
   ft_putstr("Loading: scene1\n");
   return;

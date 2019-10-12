@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 16:30:29 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 06:42:41 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/10 20:41:27 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 **	Spheres options and maters
 */
 # define SPHERE_NMB 4
+# define PLANE_NMB 2
 # define MAT_IVORY "ivory"
 # define MAT_RED_RUBBER "red_rubber"
 # define MAT_MIRROR "mirror"
@@ -54,9 +55,9 @@
 
 # define LIGHT_NMB 3
 
-# define MAX_DIST 20000
+# define MAX_DIST 3.402823E+038
 # define FALSE 0
 # define TRUE 1
 # define PI 3.14159265359
-# define FOV PI/2.0
+# define FOV PI/2
 #endif

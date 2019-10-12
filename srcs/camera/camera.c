@@ -6,13 +6,23 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 03:19:39 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 03:30:29 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/05 02:17:54 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
+t_ray cam_get_ray(t_cam cam,double u ,double v)
+{
+  t_ray r;
+  t_vec3 dir;
+  dir = vec_op_add(vec_op_add(cam.lower_l,vec_scale(cam.horiz,u)),vec_scale(cam.vert,v));
+  r = new_ray(cam.origin,dir);
+  return (r);
+}
+
 t_cam   cam_init(t_vec3 lower_l, t_vec3 horiz, t_vec3 vert, t_vec3 origin)
+
 {
   t_cam    new_cam;
 

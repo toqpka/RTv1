@@ -6,7 +6,7 @@
 #    By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 17:42:35 by gwaymar-          #+#    #+#              #
-#    Updated: 2019/10/04 03:36:06 by gwaymar-         ###   ########.fr        #
+#    Updated: 2019/10/10 17:30:18 by gwaymar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,14 @@ SRCS_FILES := main.c init_func.c color_pixel.c color_sdl.c surface.c\
 							drawer/hit_sphere.c\
 							drawer/hit_list.c\
 							drawer/new_hit_rec.c\
+							drawer/scene_intersect.c\
 							objects/sphere.c\
+							objects/plane.c\
 							objects/light.c\
+							objects/all_obj.c\
 							material/material.c\
 							drawer/back_scene2.c\
+							drawer/back_scene3.c\
 							camera/camera.c
 SRCS := $(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 

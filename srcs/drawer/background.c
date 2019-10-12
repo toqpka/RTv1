@@ -6,15 +6,15 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 02:53:17 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 06:13:45 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/08 00:53:15 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vec3  random_in_unit_sphere()
+t_vec3  random_in_unit_sphere(void)
 {
-  t_vec3  p = vec_new(1.0,1.0,1.0);
+  t_vec3  p = vec_new(1,1,1);
   while (vec_squared_len(p) >= 1.0)
   {
     p = vec_op_sub(vec_scale(vec_new(drand48(),drand48(),drand48()),2.0), vec_new(1,1,1));
@@ -82,17 +82,17 @@ void    backgr(SDL_Surface		*frame)
   cam = exec_cam(frame->w,frame->h);
 
   // CREATING lights
-    t_light   *lights;
-    lights = exec_lights();
-    // CREATING Spheres
-    t_sphere  *spher;
-    spher = exec_sphers();
+  t_light   *lights;
+  lights = exec_lights();
+  // CREATING Spheres
+  t_sphere  *spher;
+  spher = exec_sphers();
 
-t_sphere *world;
-world = spher;
+  t_sphere *world;
+  world = spher;
 
 //smoothing  ok if 100  (slow load 30 sec)
-int   ns = 1;
+int   ns = 40;
 int   s;
   i = -1;
   while (++i < frame->h)
@@ -111,7 +111,7 @@ int   s;
         col = vec_op_add(col,ray_color(ray, world, 0));
       }
 
-      col = vec_scale(col,1.0f/ns);
+      col = vec_scale(col,1.0/ns);
       col = vec_new(sqrt(col.x),sqrt(col.y),sqrt(col.z));
       int r = (int)(255.99*col.x);
       int g = (int)(255.99*col.y);

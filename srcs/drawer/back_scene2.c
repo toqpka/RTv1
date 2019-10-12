@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 18:41:16 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 06:42:46 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/12 13:01:46 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,21 @@ void    back_scene2(SDL_Surface		*frame)
   t_vec3 horiz = vec_new(left*2.0, 0.0, 0.0);
   t_vec3 vert = vec_new(0.0, down*2.0, 0.0);
   t_vec3 origin = vec_new(0.0, 0.0, 0.0);
-// CREATING lights
+
+  //SDL_Surface *env_map = IMG_Load( "textures/envmap.jpg" );
+  SDL_Surface *env_map = IMG_Load( "textures/london_cityscape_515132.jpg" );
+  //SDL_Surface *env_map = IMG_Load( "textures/pont_de_bir_hakeim_565362.jpg" );
+
   t_light   *lights;
   int       nbrs_lghts = LIGHT_NMB;
   lights = create_null_list_lights(nbrs_lghts);
   if (!(lights))
     ft_print_error_exit(&ft_putendl, "Error, no_lights");
 
-  lights[0] = light_new(vec_new(-20.0,  20.0,  20.0), 1.5);
-  lights[1] = light_new(vec_new( 30.0,  50.0, -25.0), 1.4);
-  lights[2] = light_new(vec_new( 30.0,  20.0,  30.0), 0.4);
+  lights[0] = light_new(vec_new(-200.0,  200.0,  200.0), 2.5);
+  //lights[0] = light_new(vec_new( 0.0,  -140.0,  0.0), 1.5);
+  lights[1] = light_new(vec_new( 300.0,  500.0, -250.0), 2);
+  lights[2] = light_new(vec_new( 300.0,  200.0,  300.0), 2);
 // CREATING Spheres
   t_sphere  *spher;
   int       nbrs_sph = SPHERE_NMB;
@@ -48,12 +53,16 @@ void    back_scene2(SDL_Surface		*frame)
   mater_fill(&red_rubber, MAT_RED_RUBBER);
   mater_fill(&mirror, MAT_MIRROR);
 // filling spheres
-  spher[0] = sphere_new(vec_new(-3.0,  0.0, -16.0), 2, ivory);
-  spher[1] = sphere_new(vec_new(-1.0, -1.5, -12.0), 2, red_rubber);
-  spher[2] = sphere_new(vec_new( 1.5, -0.5, -18.0), 3, red_rubber);
-  spher[3] = sphere_new(vec_new( 7.0,  5.0, -18.0), 4, ivory);
+  spher[0] = sphere_new(vec_new( 0.0,  0.0, -10.0), 3, mirror);
+  spher[1] = sphere_new(vec_new(-7.0, 0.0, -10.0), 3, ivory);
+  spher[2] = sphere_new(vec_new( 7.0, 0.0, -10.0), 3, red_rubber);
+  spher[3] = sphere_new(vec_new( 7.0,  5.0, -18.0), 4, mirror);
 
   size_t	depth = 0;
+
+  t_obj   all_obj;
+
+  fill_all_obj(&all_obj);
 
   i = -1;
   while (++i < frame->h)
@@ -61,15 +70,23 @@ void    back_scene2(SDL_Surface		*frame)
     j = -1;
     while (++j < frame->w)
     {
-      double x =  (2*(j+0.5)/(double)frame->w - 1)*tan(FOV/2.)*frame->w/(double)frame->h;
-      double y = -(2*(i+0.5)/(double)frame->h - 1)*tan(FOV/2.);
-      t_vec3 dir = unit_vector(vec_new(x, y, -1));
-      t_ray ray = new_ray(origin, dir);
+      //double x =  (2*(j+0.5)/(double)frame->w - 1)*tan(FOV/2.)*frame->w/(double)frame->h;
+      //double y = -(2*(i+0.5)/(double)frame->h - 1)*tan(FOV/2.);
+      //t_vec3 dir = unit_vector(vec_new(x, y, -1));
+      t_vec3 dir = vec_new(0, 0, 0);
+      dir.x =  (j + 0.5) - frame->w/2.0;
+      dir.y = -(i + 0.5) + frame->h/2.0;
+      dir.z = -(frame->h)/(2.f*tan(FOV/2.f));
+
+      t_ray ray = new_ray(origin, unit_vector(dir));
       depth = 0;
-      t_vec3 col = cast_ray(ray, spher, lights, depth);
-      int r = (int)(255.99*col.x);
-      int g = (int)(255.99*col.y);
-      int b = (int)(255.99*col.z);
+      t_vec3 col = cast_ray(ray, spher, lights, depth, env_map);
+
+      float max_f = fmax(col.x,(fmax(col.y,col.z)));
+      if (max_f > 1) col = vec_scale(col,1.f/max_f);
+      int r = (int)(255.99*fmax(0.f, fmin(1.f, col.x)));
+      int g = (int)(255.99*fmax(0.f, fmin(1.f, col.y)));
+      int b = (int)(255.99*fmax(0.f, fmin(1.f, col.z)));
       put_pixel(frame, j, i, pack_color(r,g,b));
     }
   }

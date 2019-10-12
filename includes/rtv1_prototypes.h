@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:57 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 05:27:55 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/10 19:17:01 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double    hit_sphere(t_vec3 center, double radius, t_ray ray);
 t_hit_rec   new_hit_rec(double t, t_vec3 p, t_vec3 normal);
 
 int ray_intersect(t_sphere sphere, t_ray ray, float *t0);
-t_vec3	cast_ray(t_ray ray, t_sphere *sphers, t_light *light , size_t	depth);
+t_vec3	cast_ray(t_ray ray, t_sphere *sphers, t_light *light , size_t	depth ,SDL_Surface *env_map);
 
 /*
 ** Object functions
@@ -95,7 +95,7 @@ void        back_scene2(SDL_Surface		*frame);
 t_sphere    *create_null_list_spheres(int nbr);
 t_mater     mater_new(void);
 void        mater_fill(t_mater *mat, char *mat_type);
-int         scene_intersect(t_sphere *sphere, t_ray ray, t_vec3 *hit, t_vec3 *nbig, t_mater *material);
+int   scene_intersect(t_plane plane, t_sphere *sphere, t_ray ray, t_vec3 *hit, t_vec3 *nbig, t_mater *material);
 t_light     *create_null_list_lights(int nbr);
 t_light     light_new(t_vec3 pos, double intens);
 t_vec3      reflect(t_vec3 a, t_vec3 b);
@@ -109,5 +109,18 @@ uint8_t   hitable_list(t_ray ray, double t_min, double t_max, t_hit_rec *rec, t_
 t_light   *exec_lights(void);
 t_sphere   *exec_sphers(void);
 uint8_t   hitable(t_sphere sphere, t_ray ray, double t_min, double t_max, t_hit_rec *rec);
+int     ft_flip(SDL_Surface *surface);
+void    back_scene3(SDL_Surface		*frame);
+t_ray cam_get_ray(t_cam cam,double u ,double v);
+t_vec3  random_in_unit_sphere(void);
+int ft_scatter(t_mater *mater,t_ray ray, t_hit_rec *rec, t_vec3 *atten, t_ray *scatter);
+
+
+Uint32		read_pixel(SDL_Surface *surf, const int x, const int y);
+Uint32    getpixel_surf(SDL_Surface *surface, int x, int y);
+
+void  fill_all_obj(t_obj  *all_obj);
+t_plane   plane_new(t_vec3 n,t_vec3 line,t_mater  mat);
+int ray_intersect_plane(t_plane plane, t_ray ray, float *t0);
 
 #endif

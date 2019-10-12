@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 01:33:45 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 02:57:48 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/08 05:04:40 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ uint32_t    pack_color(const uint8_t r, const uint8_t g, const uint8_t b)
   return (r | g << 8 | b << 16 | a << 24);
 }
 //
-// void        unpack_color( uint32_t color, uint8_t *r, uint8_t *g, uint8_t *b, uint8_t *a)
-// {
-//   *b = (color >>  0) & 255;
-//   *g = (color >>  8) & 255;
-//   *r = (color >> 16) & 255;
-//   *a = (color >> 24) & 255;
-// //   return ;
-// }
+void        unpack_color( uint32_t color, uint8_t *r, uint8_t *g, uint8_t *b, uint8_t *a)
+{
+  *r = (color >>  0) & 255;
+  *g = (color >>  8) & 255;
+  *b = (color >> 16) & 255;
+  *a = (color >> 24) & 255;
+  return ;
+}
 
 void			put_pixel(SDL_Surface *surf, const int x, const int y, const int color)
 {

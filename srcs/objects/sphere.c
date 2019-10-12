@@ -6,11 +6,26 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 04:53:45 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 06:08:46 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/10 20:46:03 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+// for sphere
+int ray_intersect(t_sphere sphere, t_ray ray, float *t0)
+{
+  t_vec3 lbig = vec_op_sub(sphere.center, ray.origin);
+  float tca = (float)vec_dot(lbig, ray.direct);
+  float d2 = (float)vec_dot(lbig, lbig) - tca*tca;
+  if (d2 > sphere.radius*sphere.radius) return FALSE;
+  float thc = sqrtf(sphere.radius*sphere.radius - d2);
+  float t2 = tca - thc;
+  float t1 = tca + thc;
+  if (t2 < 0) t2 = t1;
+  if (t2 < 0) return FALSE;
+  *t0 = t2;
+  return TRUE;
+}
 
 t_sphere    *create_null_list_spheres(int nbr)
 {

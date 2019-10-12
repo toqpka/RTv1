@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 16:20:54 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 04:44:52 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/10 20:50:44 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,20 @@ typedef struct		s_sphere
   //uint8_t   (*scatter)(const t_ray, const t_hit, t_vec3*, t_ray*);
 }                 t_sphere;
 
+typedef struct		s_plane
+{
+  t_vec3            norm;
+  t_vec3            line;
+  t_mater           mater;
+}                 t_plane;
+
+typedef struct		s_cone
+{
+  t_vec3            center;
+  double            ang;
+  double            height;
+  t_mater           mater;
+}                 t_cone;
 /*
 **	Light
 */
@@ -110,5 +124,11 @@ typedef struct		s_light
   double    intens;
   t_vec3    pos;
 }                 t_light;
+
+typedef struct		s_obj
+{
+  void      *type;
+  char      *c_type;
+}                 t_obj;
 
 #endif

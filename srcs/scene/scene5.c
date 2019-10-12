@@ -6,7 +6,7 @@
 /*   By: gwaymar- <gwaymar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 00:05:03 by gwaymar-          #+#    #+#             */
-/*   Updated: 2019/10/04 02:57:03 by gwaymar-         ###   ########.fr       */
+/*   Updated: 2019/10/05 01:34:16 by gwaymar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void    scene5(t_sdl **sdl)
     {
       if (j < frame->w/2)
       {
-        if (i < frame->h/2)
-          put_pixel(frame, j, i, pack_color(0,0,255));
-        else
+        // if (i < frame->h/2)
+        //   put_pixel(frame, j, i, pack_color(0,0,255));
+        // else
           put_pixel(frame, j, i, pack_color(0,255,0));
       }
       else
-        if (i < frame->h/2)
-          put_pixel(frame, j, i, pack_color(255,0,0));
-        else
+        // if (i < frame->h/2)
+        //   put_pixel(frame, j, i, pack_color(255,0,0));
+        // else
           put_pixel(frame, j, i, pack_color(255,255,255));
     }
   }
